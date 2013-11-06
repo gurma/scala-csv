@@ -81,8 +81,11 @@ class CSVReader protected (private val reader: Reader)(implicit format: CSVForma
   }
 
   def toStream(): Stream[List[String]] =
-    Stream.continually(readNext).takeWhile(_.isDefined).map(_.get)
-
+    format.ignoreWhitespace match {
+      case true => Stream.continually(readNext).takeWhile(_.isDefined).map(_.get.map(s => s.trim()))
+      case false => Stream.continually(readNext).takeWhile(_.isDefined).map(_.get)
+	}
+  
   def all(): List[List[String]] = {
     toStream().toList
   }

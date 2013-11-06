@@ -28,6 +28,8 @@ trait DefaultCSVFormat extends CSVFormat {
   val quoting: Quoting = QUOTE_MINIMAL
 
   val treatEmptyLineAsNil: Boolean = false
+  
+  val ignoreWhitespace: Boolean = false
 
 }
 
@@ -45,5 +47,6 @@ trait TSVFormat extends CSVFormat {
 
   val treatEmptyLineAsNil: Boolean = false
 
+  val ignoreWhitespace: Boolean = false
 }
 
